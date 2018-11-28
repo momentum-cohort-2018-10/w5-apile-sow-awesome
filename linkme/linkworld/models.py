@@ -6,12 +6,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
     title = models.CharField(max_length=255)
-<<<<<<< Updated upstream
-    url = models.URLField(null=True)
-    date = models.DateTimeField(auto_now=True)
-=======
     url = models.URLField()
->>>>>>> Stashed changes
 
 
 class Comment(models.Model):

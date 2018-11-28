@@ -12,11 +12,7 @@
 
 {% for post in posts %}
   <h3> <a href = "{{ post.title }}">{{ post.title }}</a></h3>
-<<<<<<< Updated upstream
-   
-=======
    <p><a href="{{ post.url }}">link</a></p>
->>>>>>> Stashed changes
    <p> {{ post.text|truncatewords:100 }} </p>
    <p class="author"> by {{ post.author | title }} </p>
    {% comment %} <p> {{ post.date | date: "Y m d }} {% endcomment %}
