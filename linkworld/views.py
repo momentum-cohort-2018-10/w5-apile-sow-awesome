@@ -9,7 +9,8 @@ from django.conf import settings
 def index(request):
     posts = Post.objects.all().order_by("-date")
     comments = Comment.objects.all().order_by("-date")
-    return render(request, 'index.html', {'posts': posts, 'comments': comments, })
+    return render(request, 'index.html', {'posts': posts, 'comments': comments,
+                                          })
 
 
 def post_detail(request, slug):
@@ -22,6 +23,7 @@ def post_detail(request, slug):
     })
 
 
+@login_required
 def new_post(request):
 
     form = PostForm(request.POST)
@@ -36,6 +38,7 @@ def new_post(request):
     return render(request, 'posts/new_post.html', {'form': form})
 
 
+@login_required
 def delete_new_post(request):
     if request.POST.get('pk'):
         post = get_object_or_404(Post, pk=request.POST.get('pk'))
@@ -43,6 +46,7 @@ def delete_new_post(request):
         return redirect('home')
 
 
+@login_required
 def comment_on_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     if request.method == "POST":
@@ -57,6 +61,7 @@ def comment_on_post(request, slug):
     return render(request, 'posts/comment_on_post.html', {'form': form})
 
 
+@login_required
 def delete_comment(request):
 
     if request.POST.get('pk'):
@@ -66,6 +71,7 @@ def delete_comment(request):
         return redirect('post_detail', slug=post.slug)
 
 
+@login_required
 def upvote(request, slug):
     post = get_object_or_404(Post, slug=slug)
     if request.method == "POST":
