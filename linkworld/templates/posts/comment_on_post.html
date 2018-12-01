@@ -15,11 +15,10 @@
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Send</button>
-        <button type="submit" class="save btn btn-default">Like</button>
+        
     
 
-    <p>Do you wish to delete this comment?</p>
-         <button type="submit" class="save btn btn-default">Delete</button>
-    </form>
+    {% comment %} {% if user = request.user %} {% endcomment %}
+    
 
 {% endblock %}

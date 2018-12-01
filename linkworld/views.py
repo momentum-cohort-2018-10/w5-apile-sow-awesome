@@ -37,10 +37,9 @@ def new_post(request):
 
 
 def delete_new_post(request):
-    form = PostForm(request.POST)
-    new_post = form.save()
-    if request.POST.get('delete'):
-        new_post.delete()
+    if request.POST.get('pk'):
+        post = get_object_or_404(Post, pk=request.POST.get('pk'))
+        post.delete()
         return redirect('home')
 
 
@@ -53,7 +52,6 @@ def comment_on_post(request, slug):
             comment.post = post
             comment.save()
             return redirect('post_detail', slug=post.slug)
-
     else:
         form = CommentForm()
     return render(request, 'posts/comment_on_post.html', {'form': form})
@@ -61,9 +59,11 @@ def comment_on_post(request, slug):
 
 def delete_comment(request):
 
-    if request.POST.get('delete'):
-        Comment.objects.all().delete()
-        return redirect('home')
+    if request.POST.get('pk'):
+        comment = get_object_or_404(Comment, pk=request.POST.get('pk'))
+        post = comment.post
+        comment.delete()
+        return redirect('post_detail', slug=post.slug)
 
 # def upvote(request, slug):
 #     post = Post.objects.get(slug=slug)
