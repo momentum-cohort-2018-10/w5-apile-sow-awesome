@@ -17,17 +17,15 @@
    <p><a href="{{ post.url }}">link</a></p>
    <p> {{ post.text|truncatewords:100 }} </p>
    <p class="author"> by {{ post.author | title }} </p>
-   
 
+ <form action={% url 'upvote' slug=post.slug %} method="POST">{% csrf_token %}   
+<button type="submit" class="save btn btn-default">Like</button>
    <hr>
 
-<a href="{% url 'post_detail' slug=post.slug %}">Comments: {{ post.comments.count }}, </a>
-    <hr>
-{% comment %} 
-<a href="upvote/{{ post.slug }}" Votes: {{ post.votes.count }}>Like me!</a> {% endcomment %}
+<a href="{% url 'post_detail' slug=post.slug %}">Comments: {{ post.comments.count }}, 
+ Likes!: {{ post.votes.count }}</a> 
 {% endfor %}
 
 {% show_pages %}
-
 
 {% endblock content %}

@@ -1,5 +1,5 @@
-from registration.backends.simple.views import RegistrationView
+# from registration.backends.simple.views import RegistrationView
 
 
-class MyRegistrationView(RegistrationView):
-    success_url = 'registration_create_post'
+# class MyRegistrationView(RegistrationView):
+#     success_url = 'registration_create_post'

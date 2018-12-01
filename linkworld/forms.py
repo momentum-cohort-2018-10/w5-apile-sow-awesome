@@ -10,14 +10,6 @@ class PostForm(ModelForm):
         fields = ('author', 'title', 'url', 'text',)
 
 
-class DeletePostForm(ModelForm):
-
-    class Meta:
-
-        model = Post
-        fields = ()
-
-
 class CommentForm(ModelForm):
 
     class Meta:

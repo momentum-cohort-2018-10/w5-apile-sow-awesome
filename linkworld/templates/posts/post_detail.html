@@ -25,14 +25,30 @@
 
             <p>{{ comment.content }}</p>
 
-          <p>  <strong>{{ comment.commenter }}</strong></p>
+          <p> <strong>{{ comment.commenter }}</strong></p>
 
-        </div>
+        <form action={% url 'delete_comment' %} method="POST">{% csrf_token %}  
+    <p>Do you wish to delete this comment?</p>
+         <input type="hidden" name="pk" value="{{ comment.pk }}"/>
+        <button type="submit" class="save btn btn-default">Delete</button>
+    </form>
 
             {% empty %}
 
         <p>No comments here yet :(</p>
 
+
+    
         {% endfor %}
+
+    {% comment %} {% if user = request.user: %} {% endcomment %}
+
+    <form action={% url 'delete_new_post' %} method="POST">{% csrf_token %}
+    <p>Do you wish to delete this post?</p>
+    <input type="hidden" name="pk" value="{{ post.pk }}"/>
+    <button type="submit" class="save btn btn-default">Delete</button>
+    </form>
+    
+</div>
      {% endblock content %}
 
