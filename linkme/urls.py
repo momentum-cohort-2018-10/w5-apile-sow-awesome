@@ -33,7 +33,7 @@ urlpatterns = [
     path('posts/<slug>/comment/', views.comment_on_post,
          name='comment_on_post'),
     path('posts/delete_comment', views.delete_comment, name='delete_comment'),
-    # path('upvote/<slug>/vote', views.upvote, name='upvote'),
+    path('posts/<slug>/vote', views.upvote, name='upvote'),
     path('posts/new_post', views.new_post, name='new_post'),
     path('posts/delete_new_post', views.delete_new_post, name='delete_new_post'),
     path('accounts/password/reset/', PasswordResetView.as_view(

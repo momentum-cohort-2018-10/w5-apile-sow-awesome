@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from linkworld.models import Post, Comment
+from linkworld.models import Post, Comment, Vote
 from django.shortcuts import get_object_or_404
 from linkworld.forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
@@ -65,8 +65,10 @@ def delete_comment(request):
         comment.delete()
         return redirect('post_detail', slug=post.slug)
 
-# def upvote(request, slug):
-#     post = Post.objects.get(slug=slug)
-#     post.score += 1
-#     post.save()
-#     return redirect('home', slug-post.slug)
+
+def upvote(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if request.method == "POST":
+        if not Vote.objects.filter(post=post, user=request.user):
+            Vote.objects.create(post=post, user=request.user)
+    return redirect('home')
