@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load el_pagination_tags %}
 {% load staticfiles %}
+{% load gravatar %}
 
 {% block title %}
 
@@ -13,17 +14,26 @@
 
 {% paginate posts %}
 {% for post in posts %}
-  <h3> <a href ="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h3>
-   <p><a href="{{ post.url }}">link</a></p>
-   <p> {{ post.text|truncatewords:100 }} </p>
-   <p class="author"> by {{ post.author | title }} </p>
+  <h3> <a name="{{ post.slug }}" href ="{{ post.url }}">{{ post.title }}</a></h3>
 
- <form action={% url 'upvote' slug=post.slug %} method="POST">{% csrf_token %}   
-<button type="submit" class="save btn btn-default">Like</button>
-   <hr>
+ <image src ="{% gravatar_url post.author.email 150 %}" height="30" width="30"/></h4>{{ post.author }}</h4>
+
+
+ <a href="{% url 'post_detail' slug=post.slug %}">More</a>
+    <p> {{ post.text|truncatewords:100 }} </p>
+
+<div>
+ <form action= {% url 'upvote' slug=post.slug %} method="POST">{% csrf_token %}   
+    <button class="btn"><i class="glyphicon glyphicon-thumbs-up"></i></button>
 
 <a href="{% url 'post_detail' slug=post.slug %}">Comments: {{ post.comments.count }}, 
  Likes!: {{ post.votes.count }}</a> 
+ 
+ 
+ </form>
+</div>
+
+
 {% endfor %}
 
 {% show_pages %}
