@@ -4,10 +4,12 @@ from django.shortcuts import get_object_or_404, resolve_url
 from linkworld.forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.db.models import Count
 
 
 def index(request):
-    posts = Post.objects.all().order_by("-date")
+    posts = Post.objects.annotate(vote_counts=Count(
+        'votes')).order_by("-vote_counts", "-date")
     comments = Comment.objects.all().order_by("-date")
     return render(request, 'index.html', {'posts': posts, 'comments': comments,
                                           })
