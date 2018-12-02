@@ -13,6 +13,7 @@ mimesis = "*"
 gunicorn = "*"
 django-heroku = "*"
 django-el-pagination = "*"
+"django-gravatar2" = "*"
 
 [dev-packages]
 mimesis = "*"

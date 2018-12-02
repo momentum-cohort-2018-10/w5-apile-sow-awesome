@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from linkworld.models import Post, Comment, Vote
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, resolve_url
 from linkworld.forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -73,8 +73,9 @@ def delete_comment(request):
 
 @login_required
 def upvote(request, slug):
+
     post = get_object_or_404(Post, slug=slug)
     if request.method == "POST":
         if not Vote.objects.filter(post=post, user=request.user):
             Vote.objects.create(post=post, user=request.user)
-    return redirect('home')
+        return redirect(('{}#' + post.slug).format(resolve_url('home')))

@@ -1,20 +1,33 @@
 .header {
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4yTVNQEorUsf7lWeTuxzpHvPzZ4agqig2KDIADhz649w0tNWA") ;
+    width: 100%;
 
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHwr1bSkWy1cuhCVtJEifmEZbwx69TxcfJ-VNzNaePn8hm5SDQTA");
-  
+}
+nav {
+
+    float: right;
+}
+a {
+
+    color: green;
+    /* text-decoration: underline; */
 
 }
 
 body { 
     
-    background-color: rgb(167, 154, 147);
-    padding: 2em;
+    background-color: whitesmoke;
+    padding-top: 0;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-bottom: 2rem;
+    margin: 1rem;
 
 }
 
 h1 {
     padding: 2rem;
-    color: whitesmoke;
+    color: rgb(174, 59, 59);
 
 }
 
@@ -26,11 +39,11 @@ h1 {
           
           @keyframes blinker {
 
-            0%{     color: ivory;    }
+            0%{     color: red;    }
             49%{    color: transparent; }
             50%{    color: transparent; }
             99%{    color:transparent;  }
-            100%{   color: ivory;    }
+            100%{   color: red;    }
            
         }
 
@@ -46,3 +59,20 @@ h1 {
     color: greenyellow;
 
 }
+
+.btn {
+    background-color: rgb(214, 232, 166);
+   
+    cursor: pointer; }
+
+
+.btn:hover {
+    background-color: RoyalBlue;
+}
+
+
+
+/* 
+
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWeZPYgvfoCiE7VKu0cQij2V3VtXwLMxA4732pNOFgYaytGBFs"
+    ); */

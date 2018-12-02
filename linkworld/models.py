@@ -38,4 +38,3 @@ class Vote(models.Model):
         to="Post", on_delete=models.CASCADE, null=True, related_name="votes")
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="votes")
-    score = models.IntegerField(default=1, blank=True, null=True)

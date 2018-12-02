@@ -8,6 +8,7 @@
         {% endblock title %}
         </title>
         
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
        
     </head>
@@ -20,15 +21,7 @@
             
 <!-- as well as override content bits -->
 <div class="header">
-       
-                    <h1>LinkWorld</h1>
-                    
-                    <h2 class="blinking">Information linked to your fingertips...</h2>        
-             
-        
-</div>  
- 
-            <nav>
+                 <nav>
                     <a href="{% url 'home' %}">Home</a>
                     {% if user.is_authenticated %}
                    
@@ -42,9 +35,19 @@
                         <a href="{% url 'registration_register' %}">Register</a>
                     
                     {% endif %}
-                
-            </nav>
-   
+                </nav>
+                    <h1>LinkWorld</h1>
+                    <br>
+                    <br>
+                    <br>
+                    
+</div>                     
+                    <h2 class="blinking">Information linked to your fingertips...</h2>        
+             
+        
+ 
+ 
+           
 
 
     {% block content %}

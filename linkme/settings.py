@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'mimesis',
     'el_pagination',
+    'django_gravatar',
 
 
 ]
