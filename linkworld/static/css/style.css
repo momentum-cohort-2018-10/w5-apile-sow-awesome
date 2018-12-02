@@ -67,9 +67,15 @@ h1 {
 
 
 .btn:hover {
-    background-color: RoyalBlue;
+    background-color: darkcyan;
 }
 
+.delete {
+    
+    color: brown;
+    font-size: 12px;
+    font-style: helvatica;
+}
 
 
 /* 

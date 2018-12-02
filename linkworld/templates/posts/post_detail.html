@@ -32,9 +32,9 @@
           
 
         <form action={% url 'delete_comment' %} method="POST">{% csrf_token %}  
-        <p>Do you wish to delete this comment?</p>
+        <p class="delete">[Do you wish to delete this comment?]
          <input type="hidden" name="pk" value="{{ comment.pk }}"/>
-        <button type="submit" class="save btn btn-default">Delete</button>
+        <button class="btn"><i class="fa fa-trash-o" style="font-size:20px"></i></button>,</p>
     </form>
 
             {% empty %}
@@ -47,10 +47,12 @@
 
     {% comment %} {% if user = request.user: %} {% endcomment %}
 
+        <hr>
+        <hr>
     <form action={% url 'delete_new_post' %} method="POST">{% csrf_token %}
-    <p>Do you wish to delete this post?</p>
+    <p class="delete">Do you wish to delete this post?</p>
     <input type="hidden" name="pk" value="{{ post.pk }}"/>
-    <button type="submit" class="save btn btn-default">Delete</button>
+    <button class="btn"><i class="fa fa-trash-o" style="font-size:25px"></i></button>
     </form>
     
 </div>
