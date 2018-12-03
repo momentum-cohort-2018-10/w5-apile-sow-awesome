@@ -48,6 +48,8 @@
 </div>                     
                     <h2 class="blinking">Information linked to your fingertips...</h2>        
              
+                <p class="sort"><form action= {% url 'new_post' %} method="POST">{% csrf_token %}   
+    <button class="btn"><i class="glyphicon glyphicon-envelope"></i>Do you want to add a new post?</i></button></p>
      
  
 {% if messages %}
@@ -72,6 +74,7 @@
 
 
     {% block footer %}
+ 
  
     {% endblock footer %}
     

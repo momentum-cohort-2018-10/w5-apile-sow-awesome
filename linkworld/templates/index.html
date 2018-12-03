@@ -10,7 +10,12 @@
 {% endblock title %}
 
 {% block content %}
-<p><a href="{% url 'new_post'  %}">Do you want to add a new post?</a> </p>
+
+
+<p class="sort"><form action= {% url 'sort_by_date' %} method="POST">{% csrf_token %}   
+    <button class="btn"><i class="fa fa-home" aria-hidden="true"></i>The most recent posts</i></button> </p>
+<p class="sort:"<form action= {% url 'sort_by_likes' %} method="POST">{% csrf_token %}   
+    <button class="btn"><i class="fa fa-star-half-full" style="font-size:16px"></i>The most liked posts</i></button></p>
 
 {% paginate posts %}
 {% for post in posts %}

@@ -47,7 +47,11 @@ h1 {
            
         }
 
+. sort {
 
+     float: right;
+     
+}
 .author {
      
     color: maroon;
