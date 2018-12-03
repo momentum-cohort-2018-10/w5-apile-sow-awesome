@@ -28,7 +28,8 @@ from django.contrib.auth.views import (
 )
 urlpatterns = [
     path("", views.index, name="home"),
-
+    path('sort', views.sort_by_date, name="sort_by_date"),
+    path('sort', views.sort_by_likes, name="sort_by_likes"),
     path('posts/<slug>/', views.post_detail, name='post_detail'),
     path('posts/<slug>/comment/', views.comment_on_post,
          name='comment_on_post'),

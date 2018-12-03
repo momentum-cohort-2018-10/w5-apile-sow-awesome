@@ -11,8 +11,22 @@ from django.contrib import messages
 def index(request):
     posts = Post.objects.annotate(vote_counts=Count(
         'votes')).order_by("-vote_counts", "-date")
+
     comments = Comment.objects.all().order_by("-date")
     return render(request, 'index.html', {'posts': posts, 'comments': comments,
+                                          })
+
+
+def sort_by_date(request):
+    posts = Post.objects.order_by("-date")
+    return render(request, 'index.html', {'posts': posts,
+                                          })
+
+
+def sort_by_likes(request):
+    posts = Post.objects.annotate(vote_counts=Count(
+        'votes')).order_by("-vote_counts", "-date")
+    return render(request, 'index.html', {'posts': posts,
                                           })
 
 
