@@ -16,7 +16,7 @@
 {% for post in posts %}
   <h3> <a name="{{ post.slug }}" href ="{{ post.url }}">{{ post.title }}</a></h3>
 
- <image src ="{% gravatar_url post.author.email 150 %}" height="30" width="30"/></h4>{{ post.author }}</h4>
+ <image src ="{% gravatar_url post.author.email 150 %}" height="30" width="30"/></h4>  {{ post.author }}</h4>
 
 
  <a href="{% url 'post_detail' slug=post.slug %}">More</a>
@@ -29,12 +29,16 @@
 <a href="{% url 'post_detail' slug=post.slug %}">Comments: {{ post.comments.count }}, 
  Likes!: {{ post.votes.count }}</a> 
  
+
  
  </form>
 </div>
 
 
 {% endfor %}
+
+
+
 
 {% show_pages %}
 

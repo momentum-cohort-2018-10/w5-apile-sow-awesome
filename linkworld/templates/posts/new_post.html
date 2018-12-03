@@ -12,7 +12,8 @@
 {% block content %}
 
     <p>Please post your name, the title of your post, the link to it and your introductory text here:<p>
-    <form method="POST" class="post-form">{% csrf_token %}
+    <form method="POST" class="post-form">
+        {% csrf_token %}
         {{ form.as_p }}
         <button class="btn"><i class="glyphicon glyphicon-envelope"></i>Send</button>
 
