@@ -6,6 +6,8 @@ For this week's project, you will build as a group a Django application that use
 
 ## Specifications
 
+
+
 ### Models
 
 - The focus of the application is the concept of "posts". Posts are what users add, vote on, and comment on. Each post must have one author (the user who created it), a link, and a title. Each post can have a description -- longer text describing the link or asking a question.
