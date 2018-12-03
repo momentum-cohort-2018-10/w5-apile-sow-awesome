@@ -15,8 +15,17 @@
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
         <button class="btn"><i class="glyphicon glyphicon-envelope"></i>Send</button>
-
-   
     </form>
+
+   {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+
 {% endblock %}
     

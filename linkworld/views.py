@@ -5,6 +5,7 @@ from linkworld.forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.db.models import Count
+from django.contrib import messages
 
 
 def index(request):
@@ -33,7 +34,11 @@ def new_post(request):
         if form.is_valid():
             new_post = form.save(commit=False)
             new_post.save()
+            update_session_auth_hash(request, form.user)
+            messages.sucess(request, "Your post has been submitted.")
             return redirect('home')
+        else:
+            messages.warning(request, "Your post has not been submitted. Please correct and try again.")
 
     else:
         form = PostForm()
