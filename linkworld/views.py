@@ -33,7 +33,7 @@ def new_post(request):
     if request.method == "POST":
         if form.is_valid():
             new_post = form.save(commit=False)
-            # breakpoint()
+            new_post.author = request.user
             new_post.save()
             messages.success(request, 'Your post is up on the site!')
             return redirect('home')
@@ -50,11 +50,13 @@ def new_post(request):
 def delete_new_post(request):
     if request.POST.get('pk'):
         post = get_object_or_404(Post, pk=request.POST.get('pk'))
-        if request.user != post.author:
-            message.warning(
-                request, 'Sorry you are not authorized to delete this post')
-        else:
+        if post.author == request.user:
             post.delete()
+            messages.success(request, 'Your post has been deleted.')
+        else:
+            messages.warning(
+                request, 'Sorry you are not authorized to delete this post')
+
         return redirect('home')
 
 
@@ -64,8 +66,9 @@ def comment_on_post(request, slug):
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
-            comment = form.save()
+            comment = form.save(commit=False)
             comment.post = post
+            comment.commenter = request.user
             comment.save()
             messages.success(
                 request, 'Great, thanks for commenting! Check it out on the post!')
@@ -84,7 +87,7 @@ def delete_comment(request):
     if request.POST.get('pk'):
         comment = get_object_or_404(Comment, pk=request.POST.get('pk'))
         post = comment.post
-        if comment.comment == request.user:
+        if comment.commenter == request.user:
             comment.delete()
             messages.success(request, 'Your comment has been deleted.')
         else:
