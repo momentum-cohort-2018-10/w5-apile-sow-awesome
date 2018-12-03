@@ -10,7 +10,17 @@
 {% endblock title %}
 
 {% block content %}
-<p><a href="{% url 'new_post'  %}">Do you want to add a new post?</a> </p>
+
+
+
+
+<div class="sort">
+             <p>   <a href="{% url 'sort_by_date' %}">Latest posts</a></p>
+
+                <a href="{% url 'sort_by_likes' %}">Most liked</a>
+
+<div class="sort">
+ 
 
 {% paginate posts %}
 {% for post in posts %}

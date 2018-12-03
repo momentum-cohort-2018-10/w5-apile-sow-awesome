@@ -4,8 +4,9 @@
 
 }
 nav {
-
+    
     float: right;
+    
 }
 a {
 
@@ -67,9 +68,16 @@ h1 {
 
 
 .btn:hover {
-    background-color: darkcyan;
+    background-color: royalblue;
 }
 
+.sort {
+
+    color: magenta;
+    background-color: burlywood;
+    font-size: 18px;
+    
+}
 .delete {
     
     color: brown;

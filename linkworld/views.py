@@ -16,6 +16,20 @@ def index(request):
                                           })
 
 
+def sort_by_date(request):
+    posts = Post.objects.order_by("-date")
+    return render(request, 'index.html', {'posts': posts,
+                                          })
+
+
+def sort_by_likes(request):
+    posts = Post.objects.annotate(vote_counts=Count(
+        'votes')).order_by("-vote_counts", "-date")
+
+    return render(request, 'index.html', {'posts': posts,
+                                          })
+
+
 def post_detail(request, slug):
 
     post = Post.objects.get(slug=slug)
@@ -38,12 +52,9 @@ def new_post(request):
             messages.success(request, 'Your post is up on the site!')
             return redirect('home')
         else:
-            messages.warning(
-                request, 'Sorry something went wrong! Please submit again!')
-    else:
-        form = PostForm()
+            form = PostForm()
 
-    return render(request, 'posts/new_post.html', {'form': form})
+        return render(request, 'posts/new_post.html', {'form': form})
 
 
 @login_required

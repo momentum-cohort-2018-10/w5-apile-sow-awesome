@@ -30,6 +30,8 @@ urlpatterns = [
     path("", views.index, name="home"),
 
     path('posts/<slug>/', views.post_detail, name='post_detail'),
+    path('sort/by_date', views.sort_by_date, name="sort_by_date"),
+    path('sort/by_likes', views.sort_by_likes, name="sort_by_likes"),
     path('posts/<slug>/comment/', views.comment_on_post,
          name='comment_on_post'),
     path('posts/delete_comment', views.delete_comment, name='delete_comment'),

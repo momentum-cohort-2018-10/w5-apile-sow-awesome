@@ -47,7 +47,9 @@
                     
 </div>                     
                     <h2 class="blinking">Information linked to your fingertips...</h2>        
-             
+    <p><form action= {% url 'new_post' %} method="POST">{% csrf_token %}   
+    <button class="btn"><i class="fa fa-envelope" aria-hidden="true"></i>Do you want to add a new post?</button> </p>     
+    <hr>   
      
  
 {% if messages %}
