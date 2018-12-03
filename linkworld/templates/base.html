@@ -18,8 +18,12 @@
     {% endblock header %}
     
 <body> 
+
+        
+    
             
 <!-- as well as override content bits -->
+
 <div class="header">
                  <nav>
                     <a href="{% url 'home' %}">Home</a>
@@ -44,18 +48,31 @@
 </div>                     
                     <h2 class="blinking">Information linked to your fingertips...</h2>        
              
-        
+     
  
- 
-           
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %} 
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span> 
+      </button>
+  {{ message }}
+  </div>
+        {% endfor %}
+    {% endif %}
+</ul>       
 
 
     {% block content %}
     
     {% endblock content %}
-    
+
+  
+
+
     {% block footer %}
-    
+ 
     {% endblock footer %}
     
     </body>

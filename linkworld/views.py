@@ -5,6 +5,7 @@ from linkworld.forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.db.models import Count
+from django.contrib import messages
 
 
 def index(request):
@@ -32,11 +33,16 @@ def new_post(request):
     if request.method == "POST":
         if form.is_valid():
             new_post = form.save(commit=False)
+            # breakpoint()
             new_post.save()
+            messages.success(request, 'Your post is up on the site!')
             return redirect('home')
-
+        else:
+            messages.warning(
+                request, 'Sorry something went wrong! Please submit again!')
     else:
         form = PostForm()
+
     return render(request, 'posts/new_post.html', {'form': form})
 
 
@@ -44,7 +50,11 @@ def new_post(request):
 def delete_new_post(request):
     if request.POST.get('pk'):
         post = get_object_or_404(Post, pk=request.POST.get('pk'))
-        post.delete()
+        if request.user != post.author:
+            message.warning(
+                request, 'Sorry you are not authorized to delete this post')
+        else:
+            post.delete()
         return redirect('home')
 
 
@@ -57,7 +67,12 @@ def comment_on_post(request, slug):
             comment = form.save()
             comment.post = post
             comment.save()
+            messages.success(
+                request, 'Great, thanks for commenting! Check it out on the post!')
             return redirect('post_detail', slug=post.slug)
+        else:
+            messages.warning(
+                request, 'Sorry something went wrong! Please submit again!')
     else:
         form = CommentForm()
     return render(request, 'posts/comment_on_post.html', {'form': form})
@@ -69,8 +84,13 @@ def delete_comment(request):
     if request.POST.get('pk'):
         comment = get_object_or_404(Comment, pk=request.POST.get('pk'))
         post = comment.post
-        comment.delete()
-        return redirect('post_detail', slug=post.slug)
+        if comment.comment == request.user:
+            comment.delete()
+            messages.success(request, 'Your comment has been deleted.')
+        else:
+            messages.warning(request, 'Sorry you are not authorized to delete this comment'
+                             )
+    return redirect('post_detail', slug=post.slug)
 
 
 @login_required
@@ -80,4 +100,7 @@ def upvote(request, slug):
     if request.method == "POST":
         if not Vote.objects.filter(post=post, user=request.user):
             Vote.objects.create(post=post, user=request.user)
-        return redirect(('{}#' + post.slug).format(resolve_url('home')))
+            messages.success(request, 'Thanks for liking!')
+        else:
+            messages.info(request, 'You have already liked this post.')
+    return redirect(('{}#' + post.slug).format(resolve_url('home')))
